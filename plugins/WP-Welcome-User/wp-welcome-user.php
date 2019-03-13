@@ -7,7 +7,7 @@
  * @wordpress-plugin
  * Plugin Name:       WP Weclome User
  * Plugin URI:        https://608.software
- * Description:       Make a logged in user feel welcome to your site! Customize their experience when they first log in with something personalized.
+ * Description:       Make a logged in user feel welcome to your site! Customize their experience when they first log in with something personalized. Remove default welcome panel and widgets from user dashboard. Add custom welcome panel
  * Version:           1.0.0
  * Author:            Jeff Hegeman
  * Author URI:        https://hegeman.me
