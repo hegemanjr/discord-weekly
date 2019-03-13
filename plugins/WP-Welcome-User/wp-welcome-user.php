@@ -25,7 +25,6 @@ class WP_Welcome_User {
         register_activation_hook( __FILE__, array($this, 'activate_plugin_name'));
         register_deactivation_hook( __FILE__, array($this, 'deactivate_plugin_name'));
         remove_action('welcome_panel', 'wp_welcome_panel');
-        add_action('admin_notices', array($this, 'action_admin_notices'));
         add_action('wp_login', array($this, 'action_wp_login'));
         add_action('admin_menu', array($this, 'action_admin_menu'));
         add_action('admin_init', array($this, 'action_admin_init'));
