@@ -19,6 +19,7 @@ class WP_Welcome_User {
 
     function __construct() {
         add_action('init', array($this, 'action_init'));
+        add_action( 'widgets_init', array($this, 'reg_dash_widgets'));
     }
 
     public function action_init() {
@@ -39,8 +40,44 @@ class WP_Welcome_User {
     }
 
     function dash01_widget(){
-        echo '<h1>Custom Widget 01</h1>';
+        ?>
+            <div id="primary-sidebar" class="primary-sidebar widget-area" role="complementary">
+                <?php dynamic_sidebar( 'dash_widget_01' ); ?>
+            </div><!-- #primary-sidebar -->
+        <?php
     }
+
+    function dash02_widget(){
+        ?>
+            <div id="primary-sidebar" class="primary-sidebar widget-area" role="complementary">
+                <?php dynamic_sidebar( 'dash_widget_02' ); ?>
+            </div><!-- #primary-sidebar -->
+        <?php
+    }
+
+    function reg_dash_widgets() {
+
+        register_sidebar( array(
+            'name'          => 'Dashboard Widget 01',
+            'id'            => 'dash_widget_01',
+            'before_widget' => '<div>',
+            'after_widget'  => '</div>',
+            'before_title'  => '<h2 class="rounded">',
+            'after_title'   => '</h2>',
+        ) );
+
+        register_sidebar( array(
+            'name'          => 'Dashboard Widget 02',
+            'id'            => 'dash_widget_02',
+            'before_widget' => '<div>',
+            'after_widget'  => '</div>',
+            'before_title'  => '<h2 class="rounded">',
+            'after_title'   => '</h2>',
+        ) );
+
+    }
+
+
 
     // Do Stuff on the admin_menu action
     function action_admin_menu(){
@@ -49,7 +86,14 @@ class WP_Welcome_User {
 
     // Do Stuff on the admin_init action
     function action_admin_init(){
-        add_meta_box('dash01', 'Dashboard Widget Title', array($this, 'dash01_widget'), 'dashboard', 'side', 'high');
+        if ( is_active_sidebar( 'dash_widget_01' ) ){
+            add_meta_box('dash01', 'Dashboard Widget Area 1', array($this, 'dash01_widget'), 'dashboard', 'side', 'high');
+        }
+        if ( is_active_sidebar( 'dash_widget_02' ) ){
+            add_meta_box('dash02', 'Dashboard Widget Area 2', array($this, 'dash02_widget'), 'dashboard', 'normal', 'high');
+        }
+
+
     }
 
     // Do Stuff on the wp_dashboard_setup action
